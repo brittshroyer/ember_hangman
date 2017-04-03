@@ -1,0 +1,23 @@
+body{
+  background: #444;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+.title, footer{
+  text-align: center;
+}
+footer{
+  position: absolute;
+  bottom: 4vh;
+  left: 48vw;
+}
+.enterNames{
+  height: 30vh;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10vh auto;
+}
