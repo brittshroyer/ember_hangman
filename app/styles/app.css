@@ -21,3 +21,13 @@ footer{
   align-items: center;
   margin: 10vh auto;
 }
+.topic-display, .answer-attempt{
+  width: 40vw;
+  margin: 20vh auto;
+  text-align: center;
+}
+.answer-attempt p{
+  font-size: 80px;
+  letter-spacing: 40px;
+  text-decoration: underline;
+}
