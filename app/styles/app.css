@@ -12,7 +12,7 @@ footer{
   bottom: 4vh;
   left: 48vw;
 }
-.enterNames{
+.enterNames, .set-answer{
   height: 30vh;
   width: 40vw;
   display: flex;

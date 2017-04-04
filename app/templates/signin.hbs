@@ -1,14 +1,13 @@
+{{!-- templates/signin.hbs --}}
 <div class="enterNames">
   <h2>Player Sign In</h2>
-  <form {{action save on="submit"}}>
+  <form>
     <div class="p1input">
-      {{input type="text" placeholder="Player 1" valueBinding="p1name" cols="60" rows="1"}}
+      {{input type="text" value=p1name placeholder="Player 1" cols="60" rows="1"}}
     </div>
     <div class="p2input">
-      {{input type="text" placeholder="Player 2" valueBinding="p2name" cols="60" rows="1"}}
+      {{input type="text" value=p2name placeholder="Player 2" cols="60" rows="1"}}
     </div>
-    {{!-- {{#link-to "setanswer"}} --}}
-    <button>Submit</button>
-    {{!-- {{/link-to}} --}}
+    {{#link-to "setanswer"}}<button>Submit</button>{{/link-to}}
   </form>
 </div>
