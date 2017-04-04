@@ -21,7 +21,7 @@ footer{
   align-items: center;
   margin: 10vh auto;
 }
-.topic-display, .answer-attempt{
+.start, .topic-display, .answer-attempt{
   width: 40vw;
   margin: 20vh auto;
   text-align: center;
@@ -30,4 +30,20 @@ footer{
   font-size: 80px;
   letter-spacing: 40px;
   text-decoration: underline;
+}
+.guess-letters{
+  width: auto;
+  height: auto;
+  background: tomato;
+  position: absolute;
+  top: 18%;
+  right: 7%;
+  border-radius: 8px;
+  box-shadow: 3px 2px 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
+  letter-spacing: 50px;
+  border-bottom: white;
 }
