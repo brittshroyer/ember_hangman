@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  finalArray: ['hello'],
+  finalArray: [],
   actions: {
     add(val){
       let newArray = val.split('');
@@ -9,7 +9,8 @@ export default Ember.Component.extend({
       for(let i=0; i<newArray.length; i++){
         this.get('finalArray').pushObject({
           value: newArray[i],
-          visible: false
+          visible: false,
+          placeholder: '_'
         });
       }
       console.log('Array of Objects', this.get('finalArray'));

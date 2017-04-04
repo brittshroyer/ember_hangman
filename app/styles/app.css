@@ -12,7 +12,7 @@ footer{
   bottom: 4vh;
   left: 48vw;
 }
-.enterNames, .set-answer{
+.enterNames, .set-topic, .set-answer{
   height: 30vh;
   width: 40vw;
   display: flex;
@@ -33,11 +33,11 @@ footer{
 }
 .guess-letters{
   width: auto;
+  text-align: center;
   height: auto;
   background: tomato;
-  position: absolute;
-  top: 18%;
-  right: 7%;
+  margin: 0 auto;
+  padding-left: 5%;
   border-radius: 8px;
   box-shadow: 3px 2px 2px;
   display: flex;

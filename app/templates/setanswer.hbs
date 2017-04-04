@@ -1,8 +1,5 @@
 <div class="set-answer">
-  <p>{{signin.executioner}}, set a topic:</p>
-  {{input type="text" value=topic placeholder="Topic" cols="40" rows="10"}}
-  <p>{{signin.executioner}}, set the answer:</p>
-  {{input type="text" value=answer placeholder="Answer" cols="40" rows="10"}}<br>
-  <p>{{signin.pname}} no cheating!</p>
-  {{#link-to "play"}}<button type="submit">Play</button>{{/link-to}}
+  <p>{{index.executioner}}, Set Answer:</p>
+  {{answer-list}}
+  <p>{{index.pname}}, no cheating!</p>
 </div>
