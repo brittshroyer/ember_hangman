@@ -32,7 +32,7 @@ footer{
   text-decoration: underline;
 }
 .guess-letters{
-  width: auto;
+  /*width: auto;*/
   text-align: center;
   height: auto;
   background: tomato;

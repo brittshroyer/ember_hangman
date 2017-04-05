@@ -5,16 +5,22 @@ export default Ember.Component.extend({
   actions: {
     add(val){
       let newArray = val.split('');
-      // console.log('answer array', newArray);
       for(let i=0; i<newArray.length; i++){
-        this.get('finalArray').pushObject({
-          value: newArray[i],
-          visible: false,
-          placeholder: '_'
-        });
+        if(newArray[i] != ' '){
+          this.get('finalArray').pushObject({
+            value: newArray[i],
+            visible: false,
+            placeholder: '_'
+          });
+        }else{
+          this.get('finalArray').pushObject({
+            placeholder: '*'
+          });
+        }
       }
       console.log('Array of Objects', this.get('finalArray'));
       let objectArray = this.get('finalArray');
+
     }
   }
 
