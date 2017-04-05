@@ -1,7 +1,16 @@
-{{input value=textValue}}
-<button{{action 'add' textValue}}>Add</button>
+<div class="submit-answer">
+  {{input value=textValue id="answer-input-field"}}
+  <button{{action 'generateGuessField' textValue}} {{action 'displayAlphabet'}}>Add</button>
+</div>
 <div class="guess-letters">
   {{#each finalArray as |letter|}}
     {{letter.placeholder}}
   {{/each}}
 </div>
+<div id="buttons">
+  {{alphabet-list}}
+</div>
+
+
+
+{{!-- maybe put input field and button inside a div and toggle its visbility on click --}}
