@@ -4,14 +4,10 @@ body{
   width: 100vw;
   position: relative;
 }
-.title, footer{
+.title{
   text-align: center;
 }
-footer{
-  position: absolute;
-  bottom: 4vh;
-  left: 48vw;
-}
+
 .enterNames, .set-topic{
   height: 30vh;
   width: 40vw;
@@ -19,25 +15,21 @@ footer{
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 10vh auto 0 auto;
+  margin: 0 auto 0 auto;
 }
 .start, .topic-display, #set-answer{
   width: 40vw;
-  margin: 10vh auto 0 auto;
+  margin: 0 auto 0 auto;
   text-align: center;
 }
-/*.answer-attempt p{
-  font-size: 80px;
-  letter-spacing: 40px;
-  text-decoration: underline;
-}*/
+
 .guess-letters{
   text-align: center;
   height: auto;
-  background: tomato;
-  font-size: 80px;
-  letter-spacing: 30px;
-  margin: -10vh auto 0 auto;
+  /*background: tomato;*/
+  font-size: 90px;
+  letter-spacing: 25px;
+  margin: 0 auto 20vh auto;
   width: 80vw;
   word-break: break-all;
 }
@@ -48,5 +40,19 @@ footer{
   text-align: center;
 }
 #buttons{
-  width: 400px; height: 100px; background: white; visibility: hidden;
+  width: 80vw; height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 10vw;
+  bottom: 5vh;
+
+}
+.individual-button{
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  font-size: 20px;
+  cursor: pointer;
 }

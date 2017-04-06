@@ -1,10 +1,20 @@
+
 <div id="set-answer">
   <p>{{index.pname}}, no cheating!</p>
   <p>{{index.executioner}}, Set Answer:</p>
 </div>
-<div class="answer-list-component">
-  {{answer-list}}
+
+<div class="submit-answer">
+  {{input value=textValue id="answer-input-field"}}
+  <button{{action 'generateGuessField' textValue}}>Start</button>
+</div>
+<div class="guess-letters">
+  {{#each finalArray as |letter|}}
+    {{letter.showing}}
+  {{/each}}
 </div>
 <div id="buttons">
-  {{alphabet-list}}
+  {{#each alphabetList as |character|}}
+    {{letter-component let=character chosen='false' answer=finalArray}}
+  {{/each}}
 </div>
