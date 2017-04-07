@@ -16,17 +16,18 @@ export default Ember.Controller.extend({
       let newArray = val.split('');
       for(let i=0; i<newArray.length; i++){
         if(newArray[i] !== ' '){
-          let letterObject = new function(){
-            this.value = newArray[i],
-            this.placeholder = '_',
-            this.showing = this.placeholder
-          };
+          let letterObject = Ember.Object.create({
+            character: newArray[i],
+            placeholder: '**',
+            showing: this.placeholder
+          });
           this.get('finalArray').pushObject(letterObject);
         }else{
-          let letterSpaceObject = new function(){
-            this.placeholder = '*',
-            this.showing = this.placeholder
-          };
+          let letterSpaceObject = Ember.Object.create({
+            character: newArray[i],
+            placeholder: '*',
+            showing: this.placeholder
+          });
           this.get('finalArray').pushObject(letterSpaceObject);
         }
       }

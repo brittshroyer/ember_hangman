@@ -6,9 +6,9 @@ export default Ember.Component.extend({
       let answer = this.answer;
       let letter = this.let;
       answer.forEach(function(e){
-        if(e.value == letter){
-          console.log('%j', answer[0].placeholder);
-          answer[0].Set('showing', answer.value);
+        if(e.character === letter){
+          console.log('%j', e);
+          e.set('showing', e.character);
           // answer.forEach(function(e){
           //   e.
           // })
