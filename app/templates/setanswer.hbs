@@ -10,11 +10,27 @@
 </div>
 <div class="guess-letters">
   {{#each finalArray as |letter|}}
-    {{letter.character}}
+    {{letter.placeholder}}
   {{/each}}
 </div>
 <div id="buttons">
   {{#each alphabetList as |character|}}
-    {{letter-component let=character chosen='false' answer=finalArray}}
+    {{letter-component let=character chosen='false' action="controllerCheckAnswer"}}
   {{/each}}
+</div>
+<div class="guesses">
+  {{#if dead}}
+    <p class="gameOver">Game Over</p>
+  {{/if}}
+  {{#unless dead}}
+    <p><span id="guessNumber">{{guesses}}</span> guesses remaining.</p>
+  {{/unless}}
+</div>
+<div class="hangman">
+  <div class="bodyPart" id="head"></div>
+  <div class="bodyPart" id="body"></div>
+  <div class="bodyPart" id="larm"></div>
+  <div class="bodyPart" id="rarm"></div>
+  <div class="bodyPart" id="lleg"></div>
+  <div class="bodyPart" id="rleg"></div>
 </div>
