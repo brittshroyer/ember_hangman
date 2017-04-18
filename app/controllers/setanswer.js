@@ -1,9 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  settopic: Ember.inject.controller(),
   index: Ember.inject.controller(),
   alphabetList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
   'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+  alphabet: function(){
+    return this.get('alphabetList');
+  }.property('guesses'),
   bodyParts: ['lleg', 'rleg', 'rarm', 'larm', 'body', 'head'],
   guesses: 6,
   dead: false,
@@ -36,17 +40,15 @@ export default Ember.Controller.extend({
       }
     },
     controllerCheckAnswer(letter) {
-      console.log('yooo', letter);
-      // let letter = this.let;
+      console.log('this', this);
+      let alphabet = this.get('alphabetList');
       let count = -1;
       let guesses = this.get('guesses');
       let answer = this.get('finalArray');
       let limbs = this.get('bodyParts');
       let dead = this.get('dead');
-      let characters = [];
       answer.forEach(function(e){
         if(e.character === letter.toUpperCase() || e.character === letter){
-          console.log('%j', e.character);
           e.set('placeholder', e.character);
           count = 0;
         }
@@ -55,6 +57,9 @@ export default Ember.Controller.extend({
         let currentLimb = limbs[guesses - 1];
         this.set('guesses', guesses-1);
         document.getElementById(currentLimb).style.visibility = 'visible';
+        let index = alphabet.indexOf(letter.toLowerCase());
+        alphabet.splice(index, 1);
+        console.log('index', index);
       }
       if(guesses === 1){
         this.set('dead', true);

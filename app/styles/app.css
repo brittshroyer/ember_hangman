@@ -1,5 +1,5 @@
 body{
-  background: #444;
+  background: #4672E8;
   height: 100vh;
   width: 100vw;
   position: relative;
@@ -50,6 +50,7 @@ body{
 
 }
 .individual-button{
+  /*display: inline-block;*/
   height: 40px;
   width: 40px;
   margin: 5px;

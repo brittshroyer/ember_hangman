@@ -5,19 +5,32 @@
 </div>
 
 <div class="submit-answer">
-  {{input value=textValue id="answer-input-field"}}
-  <button{{action 'generateGuessField' textValue}}>Start</button>
+  {{#if dead}}
+    <button>Play Again</button>
+  {{/if}}
+  {{#if finalArray}}
+    <p>Topic: {{settopic.topic}}</p>
+  {{/if}}
+  {{#unless finalArray}}
+    {{input value=textValue id="answer-input-field"}}
+    <button{{action 'generateGuessField' textValue}}>Start</button>
+  {{/unless}}
 </div>
+
 <div class="guess-letters">
-  {{#each finalArray as |letter|}}
-    {{letter.placeholder}}
-  {{/each}}
+    {{#each finalArray as |letter|}}
+      {{letter.placeholder}}
+    {{/each}}
 </div>
+
 <div id="buttons">
-  {{#each alphabetList as |character|}}
-    {{letter-component let=character chosen='false' action="controllerCheckAnswer"}}
+  {{#each alphabet as |character|}}
+    {{#unless dead}}
+      {{letter-component let=character action="controllerCheckAnswer"}}
+    {{/unless}}
   {{/each}}
 </div>
+
 <div class="guesses">
   {{#if dead}}
     <p class="gameOver">Game Over</p>
@@ -26,6 +39,7 @@
     <p><span id="guessNumber">{{guesses}}</span> guesses remaining.</p>
   {{/unless}}
 </div>
+
 <div class="hangman">
   <div class="bodyPart" id="head"></div>
   <div class="bodyPart" id="body"></div>
