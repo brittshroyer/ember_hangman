@@ -29,7 +29,7 @@ body{
   /*background: tomato;*/
   font-size: 90px;
   letter-spacing: 25px;
-  margin: 0 auto 20vh auto;
+  margin: 5vh auto 5vh auto;
   width: 80vw;
   word-break: break-all;
 }

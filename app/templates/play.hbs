@@ -5,7 +5,7 @@
 </div>
 
 <div class="submit-answer">
-  {{#if dead}}
+  {{#if end}}
     <button>Play Again</button>
   {{/if}}
   {{#if finalArray}}
@@ -25,7 +25,7 @@
 
 <div id="buttons">
   {{#each alphabet as |character|}}
-    {{#unless dead}}
+    {{#unless end}}
       {{letter-component let=character action="controllerCheckAnswer"}}
     {{/unless}}
   {{/each}}
@@ -35,8 +35,11 @@
   {{#if dead}}
     <p class="gameOver">Game Over</p>
   {{/if}}
-  {{#unless dead}}
-    <p><span id="guessNumber">{{guesses}}</span> guesses remaining.</p>
+  {{#if winner}}
+    <p>{{index.pname}} has survived!</p>
+  {{/if}}
+  {{#unless end}}
+    <p><span id="guessNumber">{{wrongGuesses}}</span> guesses remaining.</p>
   {{/unless}}
 </div>
 

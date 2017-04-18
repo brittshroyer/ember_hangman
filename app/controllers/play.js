@@ -9,9 +9,13 @@ export default Ember.Controller.extend({
     return this.get('alphabetList');
   }.property('guesses'),
   bodyParts: ['lleg', 'rleg', 'rarm', 'larm', 'body', 'head'],
-  guesses: 6,
+  wrongGuesses: 6,
+  guesses: 0,
   dead: false,
+  winner: false,
+  end: false,
   finalArray: [],
+  placeholders: [],
   actions: {
     generateGuessField(val){
       //show alphabet
@@ -40,13 +44,19 @@ export default Ember.Controller.extend({
       }
     },
     controllerCheckAnswer(letter) {
-      console.log('this', this);
       let alphabet = this.get('alphabetList');
       let count = -1;
       let guesses = this.get('guesses');
+      this.set('guesses', guesses + 1);
+      let wrongGuesses = this.get('wrongGuesses');
       let answer = this.get('finalArray');
       let limbs = this.get('bodyParts');
       let dead = this.get('dead');
+      let placeholders = this.get('placeholders');
+      //hide chosen letters
+      let index = alphabet.indexOf(letter.toLowerCase());
+      alphabet.splice(index, 1);
+
       answer.forEach(function(e){
         if(e.character === letter.toUpperCase() || e.character === letter){
           e.set('placeholder', e.character);
@@ -54,15 +64,26 @@ export default Ember.Controller.extend({
         }
       });
       if(count !== 0){
-        let currentLimb = limbs[guesses - 1];
-        this.set('guesses', guesses-1);
+        let currentLimb = limbs[wrongGuesses - 1];
+        this.set('wrongGuesses', wrongGuesses-1);
         document.getElementById(currentLimb).style.visibility = 'visible';
-        let index = alphabet.indexOf(letter.toLowerCase());
-        alphabet.splice(index, 1);
-        console.log('index', index);
       }
-      if(guesses === 1){
+      if(wrongGuesses === 1){
         this.set('dead', true);
+        this.set('end', true);
+      }
+      let checkWinner = function(e){
+        return e !== '_';
+      }
+      this.set('placeholders', []);
+      for(let i=0, x=answer.length; i<x; i++){
+        placeholders.push(answer[i].placeholder);
+      }
+      console.log('placeholders', placeholders);
+      if(placeholders.every(checkWinner)){
+        console.log('WINNER');
+        this.set('end', true);
+        this.set('winner', true);
       }
     }
   }
