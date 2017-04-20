@@ -20,6 +20,7 @@ export default Ember.Controller.extend({
     generateGuessField(val){
       //show alphabet
       document.getElementById('buttons').style.visibility = 'visible';
+      document.getElementById('title').style.marginTop = '20px';
 
       //hide elements and clear input field
       document.getElementById('set-answer').style.visibility = 'hidden';
@@ -36,7 +37,7 @@ export default Ember.Controller.extend({
         }else{
           let letterSpaceObject = Ember.Object.create({
             character: newArray[i],
-            placeholder: '*',
+            placeholder: String.fromCharCode(160),
             showing: this.placeholder
           });
           this.get('finalArray').pushObject(letterSpaceObject);
@@ -52,6 +53,7 @@ export default Ember.Controller.extend({
       let answer = this.get('finalArray');
       let limbs = this.get('bodyParts');
       let dead = this.get('dead');
+      console.log('dead', dead);
       let placeholders = this.get('placeholders');
       //hide chosen letters
       let index = alphabet.indexOf(letter.toLowerCase());

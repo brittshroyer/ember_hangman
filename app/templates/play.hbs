@@ -6,14 +6,14 @@
 
 <div class="submit-answer">
   {{#if end}}
-    <button>Play Again</button>
+    <button class="btn">Play Again</button>
   {{/if}}
   {{#if finalArray}}
-    <p>Topic: {{settopic.topic}}</p>
+    <p class="topic">Topic: {{settopic.topic}}</p>
   {{/if}}
   {{#unless finalArray}}
-    {{input value=textValue id="answer-input-field"}}
-    <button{{action 'generateGuessField' textValue}}>Start</button>
+    {{input value=textValue id="answer-input-field" maxlength="30"}}
+    <button{{action 'generateGuessField' textValue}} class="btn">Start</button>
   {{/unless}}
 </div>
 
