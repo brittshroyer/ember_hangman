@@ -2,11 +2,11 @@
   <h2>Player Sign In</h2>
   <form>
     <div class="p1input">
-      {{input type="text" value=executioner placeholder="Executioner" cols="60" rows="1"}}
+      {{input type="text" value=executioner placeholder="Executioner" cols="60" rows="1" insert-newline="navigateOnEnter"}}
     </div>
     <div class="p2input">
-      {{input type="text" value=pname placeholder="Player" cols="60" rows="1"}}
+      {{input type="text" value=pname placeholder="Player" cols="60" rows="1" insert-newline="navigateOnEnter"}}
     </div>
   </form>
-  {{#link-to "settopic"}}<button type="submit" class="btn">Submit</button>{{/link-to}}
+  {{#link-to "settopic"}}<button type="submit" class="btn" id="btn_signin">Submit</button>{{/link-to}}
 </div>

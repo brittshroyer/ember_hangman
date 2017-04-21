@@ -17,6 +17,9 @@ export default Ember.Controller.extend({
   finalArray: [],
   placeholders: [],
   actions: {
+    startOnEnter(){
+      Ember.$('#start_btn').click();
+    },
     generateGuessField(val){
       //show alphabet
       document.getElementById('buttons').style.visibility = 'visible';
@@ -53,7 +56,6 @@ export default Ember.Controller.extend({
       let answer = this.get('finalArray');
       let limbs = this.get('bodyParts');
       let dead = this.get('dead');
-      console.log('dead', dead);
       let placeholders = this.get('placeholders');
       //hide chosen letters
       let index = alphabet.indexOf(letter.toLowerCase());
@@ -73,6 +75,7 @@ export default Ember.Controller.extend({
       if(wrongGuesses === 1){
         this.set('dead', true);
         this.set('end', true);
+        document.getElementById('guess-letters').style.marginTop = '-10vh';
       }
       let checkWinner = function(e){
         return e !== '_';
@@ -86,6 +89,7 @@ export default Ember.Controller.extend({
         console.log('WINNER');
         this.set('end', true);
         this.set('winner', true);
+        document.getElementById('guess-letters').style.marginTop = '-10vh';
       }
     }
   }

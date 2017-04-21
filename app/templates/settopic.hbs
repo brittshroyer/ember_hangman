@@ -1,5 +1,5 @@
 <div class="set-topic">
   <p>{{index.executioner}}, set a topic:</p>
-  {{input type="text" value=topic placeholder="Topic" cols="40" rows="10" maxlength="30"}}
-  {{#link-to "play"}}<button type="submit" class="btn">Next</button>{{/link-to}}
+  {{input type="text" value=topic placeholder="Topic" cols="40" rows="10" maxlength="30" insert-newline="navigateOnEnter"}}
+  {{#link-to "play"}}<button type="submit" class="btn" id="btn_settopic">Next</button>{{/link-to}}
 </div>
