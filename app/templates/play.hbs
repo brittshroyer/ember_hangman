@@ -6,7 +6,7 @@
 
 <div class="submit-answer">
   {{#if end}}
-    <button class="btn">Play Again</button>
+    {{#link-to "index"}}<button class="btn">Play Again</button>{{/link-to}}
   {{/if}}
   {{#if finalArray}}
     <p class="topic">Topic: {{settopic.topic}}</p>

@@ -147,6 +147,7 @@ input[type=text] {
   right: 90px;
   transform: rotate(-35deg);
 }
+
 .gameOver{
   color: red;
 }

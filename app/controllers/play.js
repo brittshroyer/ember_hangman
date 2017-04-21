@@ -55,7 +55,7 @@ export default Ember.Controller.extend({
       let wrongGuesses = this.get('wrongGuesses');
       let answer = this.get('finalArray');
       let limbs = this.get('bodyParts');
-      let dead = this.get('dead');
+      // let dead = this.get('dead');
       let placeholders = this.get('placeholders');
       //hide chosen letters
       let index = alphabet.indexOf(letter.toLowerCase());
@@ -64,31 +64,33 @@ export default Ember.Controller.extend({
       answer.forEach(function(e){
         if(e.character === letter.toUpperCase() || e.character === letter){
           e.set('placeholder', e.character);
+          //correct choice is neutral
           count = 0;
         }
       });
-      if(count !== 0){
+      if(count === -1){
         let currentLimb = limbs[wrongGuesses - 1];
         this.set('wrongGuesses', wrongGuesses-1);
         document.getElementById(currentLimb).style.visibility = 'visible';
-      }
-      if(wrongGuesses === 1){
-        this.set('dead', true);
-        this.set('end', true);
-        document.getElementById('guess-letters').style.marginTop = '-10vh';
+        console.log('wrong guesses', wrongGuesses);
       }
       let checkWinner = function(e){
         return e !== '_';
-      }
+      };
       this.set('placeholders', []);
       for(let i=0, x=answer.length; i<x; i++){
         placeholders.push(answer[i].placeholder);
       }
-      console.log('placeholders', placeholders);
       if(placeholders.every(checkWinner)){
         console.log('WINNER');
         this.set('end', true);
         this.set('winner', true);
+        document.getElementById('guess-letters').style.marginTop = '-10vh';
+      }
+      if(count !== 0 && wrongGuesses <= 1){
+        this.set('dead', true);
+        this.set('end', true);
+        console.log('the end');
         document.getElementById('guess-letters').style.marginTop = '-10vh';
       }
     }
