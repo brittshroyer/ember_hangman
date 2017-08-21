@@ -1,12 +1,13 @@
 <div class="enterNames">
-  <h2>Player Sign In</h2>
-  <form>
+  <h2>Image/Gif Here</h2>
+  {{!-- <form>
     <div class="p1input">
       {{input type="text" value=executioner placeholder="Executioner" cols="60" rows="1" insert-newline="navigateOnEnter"}}
     </div>
     <div class="p2input">
       {{input type="text" value=pname placeholder="Player" cols="60" rows="1" insert-newline="navigateOnEnter"}}
     </div>
-  </form>
-  {{#link-to "settopic"}}<button type="submit" class="btn" id="btn_signin">Submit</button>{{/link-to}}
+  </form> --}}
+  {{!-- {{#link-to "settopic"}}<button type="submit" class="btn" id="btn_signin">Play</button>{{/link-to}} --}}
+  <button type="submit" class="btn" id="btn_signin" {{action 'signIn'}}>Play</button>
 </div>

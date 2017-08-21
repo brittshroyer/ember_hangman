@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  auth: Ember.inject.service(),
   settopic: Ember.inject.controller(),
   index: Ember.inject.controller(),
   alphabetList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
@@ -21,6 +22,7 @@ export default Ember.Controller.extend({
       Ember.$('#start_btn').click();
     },
     generateGuessField(val){
+      this.get('auth').login();
       //show alphabet
       document.getElementById('buttons').style.visibility = 'visible';
       document.getElementById('title').style.marginTop = '20px';
@@ -34,14 +36,14 @@ export default Ember.Controller.extend({
           let letterObject = Ember.Object.create({
             character: newArray[i],
             placeholder: '_',
-            showing: this.placeholder
+            isNotSpace: true
           });
           this.get('finalArray').pushObject(letterObject);
         }else{
           let letterSpaceObject = Ember.Object.create({
             character: newArray[i],
             placeholder: String.fromCharCode(160),
-            showing: this.placeholder
+            isNotSpace: false
           });
           this.get('finalArray').pushObject(letterSpaceObject);
         }
@@ -93,6 +95,10 @@ export default Ember.Controller.extend({
         console.log('the end');
         document.getElementById('guess-letters').style.marginTop = '-10vh';
       }
+    },
+    restart(){
+      // get(this, 'auth').login();
+      // location.reload();
     }
   }
 });

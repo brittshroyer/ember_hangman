@@ -1,11 +1,25 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  executioner:'',
+const {
+  Controller,
+  inject: {
+    service,
+  },
+  get,
+} = Ember;
+
+export default Controller.extend({
+  auth: service(),
+
   pname: '',
+  executioner: '',
+
   actions: {
-    navigateOnEnter(){
-      Ember.$('#btn_signin').click();
+    signIn() {
+      get(this, 'auth').login();
     }
+    // navigateOnEnter(){
+    //   Ember.$('#btn_signin').click();
+    // }
   }
 });

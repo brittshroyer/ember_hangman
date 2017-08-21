@@ -6,22 +6,22 @@
 
 <div class="submit-answer">
   {{#if end}}
-    {{#link-to "index"}}<button class="btn">Play Again</button>{{/link-to}}
+    {{#link-to "index"}}<button class="btn"{{action 'restart'}}>Play Again</button>{{/link-to}}
   {{/if}}
   {{#if finalArray}}
     <p class="topic">Topic: {{settopic.topic}}</p>
   {{/if}}
   {{#unless finalArray}}
-    {{input value=textValue id="answer-input-field" maxlength="30" insert-newline="startOnEnter"}}
+    {{input value=textValue id="answer-input-field" maxlength="25" insert-newline="startOnEnter"}}
     <button{{action 'generateGuessField' textValue}} class="btn" id="start_btn">Start</button>
   {{/unless}}
 </div>
 
-<div class="guess-letters" id="guess-letters">
+<p class="guess-letters" id="guess-letters">
     {{#each finalArray as |letter|}}
       {{letter.placeholder}}
     {{/each}}
-</div>
+</p>
 
 <div id="buttons">
   {{#each alphabet as |character|}}

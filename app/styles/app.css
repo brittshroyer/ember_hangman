@@ -33,12 +33,16 @@ body{
 .guess-letters{
   text-align: center;
   height: 25vh;
-  letter-spacing: 25px;
-  margin: -20vh auto 5vh auto;
-  width: 80vw;
+  letter-spacing: 10px;
+  margin: -10vh auto 5vh auto;
+  /*width: auto;*/
   /*font-size: 3.5vh;*/
-  font-size: 3.5vw;
+  font-size: 2.5vw;
+  /*display: inline-block;*/
 }
+/*.nonSpaces{
+  word-break: keep-all;
+}*/
 .submit-answer{
   height: 30vh;
   width: 40vw;
