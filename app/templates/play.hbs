@@ -13,7 +13,7 @@
   {{/if}}
   {{#unless finalArray}}
     {{input value=textValue id="answer-input-field" maxlength="25" insert-newline="startOnEnter"}}
-    <button{{action 'generateGuessField' textValue}} class="btn" id="start_btn">Start</button>
+    <button{{action 'generateGuessField' textValue}} class="btn" id="start_btn">Get Word</button>
   {{/unless}}
 </div>
 
@@ -30,6 +30,8 @@
     {{/unless}}
   {{/each}}
 </div>
+
+<div>{{picture}}</div>
 
 <div class="guesses">
   {{#if dead}}
@@ -51,3 +53,5 @@
   <div class="bodyPart" id="lleg"></div>
   <div class="bodyPart" id="rleg"></div>
 </div>
+
+<h2>You are currently logged as: {{session.data.authenticated.profile.email}}</h2>

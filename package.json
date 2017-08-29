@@ -44,6 +44,24 @@
   },
   "private": true,
   "dependencies": {
-    "auth0-js": "^8.9.2"
+    "asynquence": "^0.10.0",
+    "auth0-js": "^8.9.3",
+    "body-parser": "^1.17.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.0.0",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "ember-cookies": "0.0.13",
+    "express": "^4.15.4",
+    "express-namespace": "^0.1.1",
+    "fs": "0.0.1-security",
+    "mongoose": "^4.11.8",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.11.0",
+    "passport": "^0.4.0",
+    "passport-auth0": "^0.6.0",
+    "request": "^2.81.0",
+    "serve-favicon": "^2.4.3"
   }
 }

@@ -20,6 +20,8 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      api_host: process.env['IDS_API_ADDRESS'] || 'http://localhost:3000'
+      // api_namespace: 'api'
     }
   };
 

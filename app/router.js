@@ -8,7 +8,6 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
     this.route('signin', { path: '/signin'});
-    this.route('settopic');
     this.route('play');
     this.route('results');
 });

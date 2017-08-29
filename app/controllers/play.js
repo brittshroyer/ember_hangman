@@ -1,7 +1,15 @@
 import Ember from 'ember';
 
+const {
+  inject: {
+    service,
+  },
+  get,
+  set,
+} = Ember;
+
 export default Ember.Controller.extend({
-  auth: Ember.inject.service(),
+  auth: service(),
   settopic: Ember.inject.controller(),
   index: Ember.inject.controller(),
   alphabetList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
@@ -17,13 +25,27 @@ export default Ember.Controller.extend({
   end: false,
   finalArray: [],
   placeholders: [],
+
+  picture: null,
+
+  setUserPicture() {
+    this.get('auth.auth0').client.userInfo(this.get('auth.authResult').accessToken, (err, user) => {
+      console.log('user', user);
+      return this.set('picture', user.picture);
+    });
+  },
+
   actions: {
     startOnEnter(){
       Ember.$('#start_btn').click();
+
     },
     generateGuessField(val){
-      this.get('auth').login();
-      //show alphabet
+      //
+      // return this.get('auth').logout();
+
+      this.setUserPicture();
+      // show alphabet
       document.getElementById('buttons').style.visibility = 'visible';
       document.getElementById('title').style.marginTop = '20px';
 
@@ -50,6 +72,7 @@ export default Ember.Controller.extend({
       }
     },
     controllerCheckAnswer(letter) {
+
       let alphabet = this.get('alphabetList');
       let count = -1;
       let guesses = this.get('guesses');
