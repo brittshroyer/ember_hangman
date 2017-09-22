@@ -53,6 +53,7 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "ember-cookies": "0.0.13",
+    "ember-jsonp": "0.1.2",
     "express": "^4.15.4",
     "express-namespace": "^0.1.1",
     "fs": "0.0.1-security",

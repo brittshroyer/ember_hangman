@@ -13,6 +13,8 @@ const {
 export default Service.extend({
 
   authResult: null,
+  ajax: Ember.inject.service(),
+  userId: null,
 
   auth0: computed(function () {
     return new auth0.WebAuth({
@@ -32,19 +34,40 @@ export default Service.extend({
 
   login() {
     get(this, 'auth0').authorize();
-    // get(this, 'auth0');
   },
 
 //called at application level
-//if user is not authenticated (lacks a token) then we set a new session using parsed hash
   handleAuthentication() {
+
+    let ajax = this.get('ajax');
 
     return new RSVP.Promise((resolve, reject) => {
       get(this, 'auth0').parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
           this.set('authResult', authResult);
-          // this.setUserPicture();
+          this.get('auth0').client.userInfo(authResult.accessToken, (err, user) => {
+            ajax.post('http://localhost:3000/users', {
+              data: JSON.stringify({
+                name: user.givenName,
+                picture: user.picture
+              }),
+              contentType: 'application/json'
+            })
+            .then(response => {
+              console.log('response id', response.id);
+              this.set('userId', response.id);
+              // this.get('play').set('userId', response.id);
+              Ember.run(function() {
+                resolve(response);
+              });
+            })
+            .catch(function(error) {
+              Ember.run(function() {
+                reject(error);
+              });
+            });
+          });
         } else if (err) {
           return reject(err);
         }
@@ -53,11 +76,7 @@ export default Service.extend({
     });
   },
 
-  // setUserPicture() {
-  //   get(this, 'auth0').client.userInfo(authResult.accessToken, function (err, user) {
-  //     this.set('model.picture', user.picture);
-  //   });
-  // },
+
 
   getSession() {
     return {

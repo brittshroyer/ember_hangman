@@ -1,19 +1,19 @@
 
 <div id="set-answer">
-  <p>{{index.pname}}, no cheating!</p>
-  <p>{{index.executioner}}, Set Answer:</p>
+  <p>Good luck, {{user.currentUser.name}}!</p>
 </div>
 
 <div class="submit-answer">
   {{#if end}}
     {{#link-to "index"}}<button class="btn"{{action 'restart'}}>Play Again</button>{{/link-to}}
   {{/if}}
-  {{#if finalArray}}
+  {{!-- {{#if finalArray}}
     <p class="topic">Topic: {{settopic.topic}}</p>
-  {{/if}}
-  {{#unless finalArray}}
-    {{input value=textValue id="answer-input-field" maxlength="25" insert-newline="startOnEnter"}}
-    <button{{action 'generateGuessField' textValue}} class="btn" id="start_btn">Get Word</button>
+  {{/if}} --}}
+
+
+  {{#unless showLetters}}
+    <button onclick={{action 'generateGuessField' (mut showLetters) true}} class="btn" id="start_btn">Get Word</button>
   {{/unless}}
 </div>
 
@@ -24,14 +24,24 @@
 </p>
 
 <div id="buttons">
-  {{#each alphabet as |character|}}
-    {{#unless end}}
-      {{letter-component let=character action="controllerCheckAnswer"}}
-    {{/unless}}
-  {{/each}}
+  {{#if showLetters}}
+    {{#each alphabet as |character|}}
+      {{#unless end}}
+        {{letter-component let=character action="controllerCheckAnswer"}}
+      {{/unless}}
+    {{/each}}
+  {{/if}}
 </div>
 
-<div>{{picture}}</div>
+{{!-- scoreboard --}}
+
+
+{{#if showHead}}
+  <img src={{user.currentUser.picture}}>
+{{/if}}
+
+
+
 
 <div class="guesses">
   {{#if dead}}
@@ -45,13 +55,30 @@
   {{/unless}}
 </div>
 
-<div class="hangman">
+{{#if showHead}}
   <div class="bodyPart" id="head"></div>
-  <div class="bodyPart" id="body"></div>
-  <div class="bodyPart" id="larm"></div>
-  <div class="bodyPart" id="rarm"></div>
-  <div class="bodyPart" id="lleg"></div>
-  <div class="bodyPart" id="rleg"></div>
-</div>
+{{/if}}
 
-<h2>You are currently logged as: {{session.data.authenticated.profile.email}}</h2>
+
+
+<div class="hangman">
+  {{#if showHead}}
+    <div class="bodyPart"><img src={{user.currentUser.picture}} class="headshot">
+    </div>
+  {{/if}}
+  {{#if showBody}}
+    <div class="bodyPart" id="body"></div>
+  {{/if}}
+  {{#if showRArm}}
+    <div class="bodyPart" id="rarm"></div>
+  {{/if}}
+  {{#if showLArm}}
+    <div class="bodyPart" id="larm"></div>
+  {{/if}}
+  {{#if showLLeg}}
+    <div class="bodyPart" id="lleg"></div>
+  {{/if}}
+  {{#if showRLeg}}
+    <div class="bodyPart" id="rleg"></div>
+  {{/if}}
+</div>

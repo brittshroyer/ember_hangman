@@ -4,12 +4,14 @@ const {
   inject: {
     service,
   },
+  computed,
   get,
   set,
 } = Ember;
 
 export default Ember.Controller.extend({
   auth: service(),
+  ajax: service(),
   settopic: Ember.inject.controller(),
   index: Ember.inject.controller(),
   alphabetList: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
@@ -26,50 +28,61 @@ export default Ember.Controller.extend({
   finalArray: [],
   placeholders: [],
 
-  picture: null,
+  showHead: computed.lt('wrongGuesses', 6),
+  showBody: computed.lt('wrongGuesses', 5),
+  showRArm: computed.lt('wrongGuesses', 4),
+  showLArm: computed.lt('wrongGuesses', 3),
+  showLLeg: computed.lt('wrongGuesses', 2),
+  showRLeg: computed.lt('wrongGuesses', 1),
 
-  setUserPicture() {
-    this.get('auth.auth0').client.userInfo(this.get('auth.authResult').accessToken, (err, user) => {
-      console.log('user', user);
-      return this.set('picture', user.picture);
-    });
-  },
+  showLetters: false,
+
 
   actions: {
+
     startOnEnter(){
       Ember.$('#start_btn').click();
 
     },
-    generateGuessField(val){
-      //
-      // return this.get('auth').logout();
+    generateGuessField(){
+      let ajax = this.get('ajax');
+      ajax.request('http://localhost:3000/words');
 
-      this.setUserPicture();
+
       // show alphabet
-      document.getElementById('buttons').style.visibility = 'visible';
-      document.getElementById('title').style.marginTop = '20px';
-
-      //hide elements and clear input field
-      document.getElementById('set-answer').style.visibility = 'hidden';
-      document.getElementById('answer-input-field').value = '';
-      let newArray = val.split('');
-      for(let i=0; i<newArray.length; i++){
-        if(newArray[i] !== ' '){
-          let letterObject = Ember.Object.create({
-            character: newArray[i],
-            placeholder: '_',
-            isNotSpace: true
-          });
-          this.get('finalArray').pushObject(letterObject);
-        }else{
-          let letterSpaceObject = Ember.Object.create({
-            character: newArray[i],
-            placeholder: String.fromCharCode(160),
-            isNotSpace: false
-          });
-          this.get('finalArray').pushObject(letterSpaceObject);
-        }
-      }
+      // document.getElementById('buttons').style.visibility = 'visible';
+      // document.getElementById('title').style.marginTop = '20px';
+      // var request = new Ember.RSVP.Promise(function(resolve, reject) {
+      //   Ember.$.ajax('/countries', {
+      //     success: function(response) {
+      //       resolve(response);
+      //     },
+      //     error: function(reason) {
+      //       reject(reason);
+      //     }
+      // });
+      //
+      // //hide elements and clear input field
+      // document.getElementById('set-answer').style.visibility = 'hidden';
+      // document.getElementById('answer-input-field').value = '';
+      // let newArray = val.split('');
+      // for(let i=0; i<newArray.length; i++){
+      //   if(newArray[i] !== ' '){
+      //     let letterObject = Ember.Object.create({
+      //       character: newArray[i],
+      //       placeholder: '_',
+      //       isNotSpace: true
+      //     });
+      //     this.get('finalArray').pushObject(letterObject);
+      //   }else{
+      //     let letterSpaceObject = Ember.Object.create({
+      //       character: newArray[i],
+      //       placeholder: String.fromCharCode(160),
+      //       isNotSpace: false
+      //     });
+      //     this.get('finalArray').pushObject(letterSpaceObject);
+      //   }
+      // }
     },
     controllerCheckAnswer(letter) {
 
@@ -96,7 +109,7 @@ export default Ember.Controller.extend({
       if(count === -1){
         let currentLimb = limbs[wrongGuesses - 1];
         this.set('wrongGuesses', wrongGuesses-1);
-        document.getElementById(currentLimb).style.visibility = 'visible';
+        // document.getElementById(currentLimb).style.visibility = 'visible';
         console.log('wrong guesses', wrongGuesses);
       }
       let checkWinner = function(e){
@@ -118,10 +131,10 @@ export default Ember.Controller.extend({
         console.log('the end');
         document.getElementById('guess-letters').style.marginTop = '-10vh';
       }
-    },
-    restart(){
-      // get(this, 'auth').login();
-      // location.reload();
     }
   }
+
+
+
+
 });
