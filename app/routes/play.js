@@ -25,7 +25,7 @@ export default Route.extend({
     return this.store.findAll('user');
   },
 
-  afterModel(controller, model) {
+  afterModel(controller) {
 
     let picture = this.get('auth.authResult.idTokenPayload.picture');
     return this.store.query('user', {

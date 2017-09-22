@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
   dead: false,
   winner: false,
   end: false,
-  finalArray: [],
+  wordToPresent: null,
   placeholders: [],
 
   showHead: computed.lt('wrongGuesses', 6),
@@ -36,6 +36,46 @@ export default Ember.Controller.extend({
   showRLeg: computed.lt('wrongGuesses', 1),
 
   showLetters: false,
+  word: null,
+  definition: null,
+
+  createGuessField(word, definition) {
+    let characters = word.split(''),
+        i,
+        letter,
+        space,
+        wordToPresent = [];
+
+    for (i=0; i<characters.length; i++) {
+      if (characters[i] !== ' ') {
+        letter = Ember.Object.create({
+          character: characters[i],
+          placeholder: '_',
+          isNotSpace: true
+        });
+        wordToPresent.pushObject(letter);
+
+      } else {
+        space = Ember.Object.create({
+          character: characters[i],
+          placeholder: String.fromCharCode(160),
+          isNotSpace: false
+        });
+        wordToPresent.pushObject(space);
+      }
+    }
+    this.set('wordToPresent', wordToPresent);
+    this.set('definition', definition);
+  },
+
+//how do I get this to fire only after createGuessField has finished
+  displayGuessField: computed('wordToPresent', function() {
+    return this.get('wordToPresent');
+  }),
+
+  displayDefinition: computed('definition', function() {
+    return this.get('definition');
+  }),
 
 
   actions: {
@@ -44,46 +84,17 @@ export default Ember.Controller.extend({
       Ember.$('#start_btn').click();
 
     },
+    // rename to getWord()
     generateGuessField(){
       let ajax = this.get('ajax');
-      ajax.request('http://localhost:3000/words');
-
-
-      // show alphabet
-      // document.getElementById('buttons').style.visibility = 'visible';
-      // document.getElementById('title').style.marginTop = '20px';
-      // var request = new Ember.RSVP.Promise(function(resolve, reject) {
-      //   Ember.$.ajax('/countries', {
-      //     success: function(response) {
-      //       resolve(response);
-      //     },
-      //     error: function(reason) {
-      //       reject(reason);
-      //     }
-      // });
-      //
-      // //hide elements and clear input field
-      // document.getElementById('set-answer').style.visibility = 'hidden';
-      // document.getElementById('answer-input-field').value = '';
-      // let newArray = val.split('');
-      // for(let i=0; i<newArray.length; i++){
-      //   if(newArray[i] !== ' '){
-      //     let letterObject = Ember.Object.create({
-      //       character: newArray[i],
-      //       placeholder: '_',
-      //       isNotSpace: true
-      //     });
-      //     this.get('finalArray').pushObject(letterObject);
-      //   }else{
-      //     let letterSpaceObject = Ember.Object.create({
-      //       character: newArray[i],
-      //       placeholder: String.fromCharCode(160),
-      //       isNotSpace: false
-      //     });
-      //     this.get('finalArray').pushObject(letterSpaceObject);
-      //   }
-      // }
+      ajax.request('http://localhost:3000/words')
+      .then(response => {
+        let word = response.word,
+            definition = response.def;
+        this.createGuessField(word, definition);
+      });
     },
+
     controllerCheckAnswer(letter) {
 
       let alphabet = this.get('alphabetList');

@@ -1,27 +1,26 @@
 
-<div id="set-answer">
-  <p>Good luck, {{user.currentUser.name}}!</p>
-</div>
-
 <div class="submit-answer">
   {{#if end}}
     {{#link-to "index"}}<button class="btn"{{action 'restart'}}>Play Again</button>{{/link-to}}
   {{/if}}
-  {{!-- {{#if finalArray}}
-    <p class="topic">Topic: {{settopic.topic}}</p>
-  {{/if}} --}}
 
 
-  {{#unless showLetters}}
+
+  {{#if displayDefinition}}
+    {{definition}}
+  {{else}}
+
     <button onclick={{action 'generateGuessField' (mut showLetters) true}} class="btn" id="start_btn">Get Word</button>
-  {{/unless}}
+  {{/if}}
 </div>
 
-<p class="guess-letters" id="guess-letters">
-    {{#each finalArray as |letter|}}
-      {{letter.placeholder}}
-    {{/each}}
-</p>
+{{#if displayGuessField}}
+  <p class="guess-letters" id="guess-letters">
+      {{#each wordToPresent as |letter|}}
+        {{letter.placeholder}}
+      {{/each}}
+  </p>
+{{/if}}
 
 <div id="buttons">
   {{#if showLetters}}
