@@ -1,26 +1,26 @@
 import Ember from 'ember';
 
-const {
-  Route,
-  inject: {
-    service,
-  },
-  get,
-} = Ember;
+const { Route, inject: { service } } = Ember;
 
 export default Route.extend({
   auth: service(),
+
   beforeModel() {
-    if (get(this, 'auth.isAuthenticated')) {
+
+    if (this.get('auth.isAuthenticated')) {
       return;
     }
+    return this.get('auth').handleAuthentication()
+    .then(() => {
+      if (this.get('auth.isAuthenticated')) {
+        this.transitionTo('play');
+      } else {
+        console.log('fuck');
+      }
+    });
+  },
 
-    return get(this, 'auth')
-      .handleAuthentication()
-      .then(() => {
-        if (get(this, 'auth.isAuthenticated')) {
-          this.transitionTo('play');
-        }
-      });
-  }
+  // model() {
+  //   console.log('authResult', this.get('auth.authResult'));
+  // }
 });

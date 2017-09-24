@@ -68,7 +68,6 @@ export default Ember.Controller.extend({
     this.set('definition', definition);
   },
 
-//how do I get this to fire only after createGuessField has finished
   displayGuessField: computed('wordToPresent', function() {
     return this.get('wordToPresent');
   }),
@@ -85,7 +84,7 @@ export default Ember.Controller.extend({
 
     },
     // rename to getWord()
-    generateGuessField(){
+    getWord(){
       let ajax = this.get('ajax');
       ajax.request('http://localhost:3000/words')
       .then(response => {

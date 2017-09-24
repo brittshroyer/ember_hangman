@@ -14,9 +14,8 @@ export default Service.extend({
 
   authResult: null,
   ajax: Ember.inject.service(),
-  userId: null,
 
-  auth0: computed(function () {
+  auth0: computed(function() {
     return new auth0.WebAuth({
       domain: 'brittshroyer.auth0.com',
       clientID: 'Qs3i7ek3ntiYKU4PKBHqe26HYhNEMv98',
@@ -43,34 +42,37 @@ export default Service.extend({
 
     return new RSVP.Promise((resolve, reject) => {
       get(this, 'auth0').parseHash((err, authResult) => {
+
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
           this.set('authResult', authResult);
-          this.get('auth0').client.userInfo(authResult.accessToken, (err, user) => {
-            ajax.post('http://localhost:3000/users', {
-              data: JSON.stringify({
-                name: user.givenName,
-                picture: user.picture
-              }),
-              contentType: 'application/json'
-            })
-            .then(response => {
-              console.log('response id', response.id);
-              this.set('userId', response.id);
-              // this.get('play').set('userId', response.id);
-              Ember.run(function() {
-                resolve(response);
-              });
-            })
-            .catch(function(error) {
-              Ember.run(function() {
-                reject(error);
-              });
-            });
-          });
+          // this.get('auth0').client.userInfo(authResult.accessToken, (err, user) => {
+          //   ajax.post('http://localhost:3000/users', {
+          //     data: JSON.stringify({
+          //       name: user.givenName,
+          //       picture: user.picture
+          //     }),
+          //     contentType: 'application/json'
+          //   })
+          //   .then(response => {
+          //     Ember.run(function() {
+          //       resolve(response);
+          //       console.log('response id', response.id);
+          //       return response.id;
+          //     });
+          //   })
+          //   .catch(function(error) {
+          //     console.log('error', error);
+          //     Ember.run(function() {
+          //       reject(error);
+          //     });
+          //   });
+          // });
+
         } else if (err) {
           return reject(err);
         }
+
         return resolve();
       });
     });

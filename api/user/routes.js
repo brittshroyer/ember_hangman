@@ -11,6 +11,7 @@ router.post('/', function getUser (req, res) {
   User.count({ picture: req.body.picture }, function(err, count) {
     if (count>0) {
       console.log('User already exists in DB');
+      console.log('body', req.body);
       User.findOne({ picture: req.body.picture }, function(err, document) {
         console.log('document', document);
         if (err) {
@@ -33,7 +34,7 @@ router.post('/', function getUser (req, res) {
           res.status(400).send(payload);
         } else {
           console.log('user saved to DB');
-          //need to send id back here too
+          payload['id'] = newUser._id;
           res.status(201).send(payload);
         }
       });

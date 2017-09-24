@@ -4,13 +4,14 @@
     {{#link-to "index"}}<button class="btn"{{action 'restart'}}>Play Again</button>{{/link-to}}
   {{/if}}
 
+  {{!-- {{currentUser.name}} --}}
 
 
   {{#if displayDefinition}}
     {{definition}}
   {{else}}
 
-    <button onclick={{action 'generateGuessField' (mut showLetters) true}} class="btn" id="start_btn">Get Word</button>
+    <button onclick={{action 'getWord' (mut showLetters) true}} class="btn" id="start_btn">Get Word</button>
   {{/if}}
 </div>
 
