@@ -4,9 +4,7 @@ const {
   inject: {
     service,
   },
-  computed,
-  get,
-  set,
+  computed
 } = Ember;
 
 export default Ember.Controller.extend({
@@ -29,11 +27,17 @@ export default Ember.Controller.extend({
   placeholders: [],
 
   showHead: computed.lt('wrongGuesses', 6),
-  showBody: computed.lt('wrongGuesses', 5),
+  showHead: true,
+  // showBody: computed.lt('wrongGuesses', 5),
+  showBody: true,
   showRArm: computed.lt('wrongGuesses', 4),
+  showRArm: true,
   showLArm: computed.lt('wrongGuesses', 3),
+  showLArm: true,
   showLLeg: computed.lt('wrongGuesses', 2),
+  showLLeg: true,
   showRLeg: computed.lt('wrongGuesses', 1),
+  showRLeg: true,
 
   showLetters: false,
   word: null,
@@ -79,6 +83,11 @@ export default Ember.Controller.extend({
 
   actions: {
 
+    logout() {
+      console.log('firing');
+      return this.get('auth').logout();
+    },
+
     startOnEnter(){
       Ember.$('#start_btn').click();
 
@@ -117,7 +126,7 @@ export default Ember.Controller.extend({
         }
       });
       if(count === -1){
-        let currentLimb = limbs[wrongGuesses - 1];
+        // let currentLimb = limbs[wrongGuesses - 1];
         this.set('wrongGuesses', wrongGuesses-1);
         // document.getElementById(currentLimb).style.visibility = 'visible';
         console.log('wrong guesses', wrongGuesses);

@@ -4,12 +4,14 @@
     {{#link-to "index"}}<button class="btn"{{action 'restart'}}>Play Again</button>{{/link-to}}
   {{/if}}
 
-  {{!-- {{currentUser.name}} --}}
+  <button class="btn" {{action 'logout'}}>Logout</button>
 
 
   {{#if displayDefinition}}
     {{definition}}
   {{else}}
+
+
 
     <button onclick={{action 'getWord' (mut showLetters) true}} class="btn" id="start_btn">Get Word</button>
   {{/if}}
@@ -34,6 +36,8 @@
 </div>
 
 {{!-- scoreboard --}}
+
+
 
 
 {{#if showHead}}
@@ -62,12 +66,17 @@
 
 
 <div class="hangman">
-  {{#if showHead}}
-    <div class="bodyPart"><img src={{user.currentUser.picture}} class="headshot">
-    </div>
+  <div class="nametag">{{model.name}}</div>
+  <div class="base"></div>
+  <div class="upright"></div>
+  <div class="crossbar"></div>
+  <div class="noose"></div>
+  <div class="rope"></div>
+  {{!-- {{#if showHead}}
+    <div class="bodyPart" id="head"></div>
   {{/if}}
   {{#if showBody}}
-    <div class="bodyPart" id="body"></div>
+    <div class="bodyPart" id="tshirt"></div>
   {{/if}}
   {{#if showRArm}}
     <div class="bodyPart" id="rarm"></div>
@@ -80,5 +89,5 @@
   {{/if}}
   {{#if showRLeg}}
     <div class="bodyPart" id="rleg"></div>
-  {{/if}}
+  {{/if}} --}}
 </div>

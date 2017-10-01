@@ -8,78 +8,48 @@ export default Route.extend({
 
   beforeModel() {
 
-    // let authResult = this.get('auth.authResult'),
-    //     ajax = this.get('ajax');
-
     // this.get('auth').logout();
-
     if (!this.get('auth.isAuthenticated')) {
       return this.replaceWith('application');
     }
 
-    // if (!authResult) {
-    //   return;
-    // }
-    //
-    // this.get('auth.auth0').client.userInfo(authResult.accessToken, (err, user) => {
-    //   ajax.post('http://localhost:3000/users', {
-    //     data: JSON.stringify({
-    //       name: user.givenName,
-    //       picture: user.picture
-    //     }),
-    //     contentType: 'application/json'
-    //   })
-    //   .then(response => {
-    //     console.log('RESPONSE ID', response.id);
-    //     this.set('currentUserID', response.id);
-    //     // return response.id;
-    //   })
-    //   .catch(function(error) {
-    //     console.log('error', error);
-    //   });
-    // });
   },
 
   model() {
-    let authResult = this.get('auth.authResult'),
-        ajax = this.get('ajax');
+    let token = this.get('auth').getSession().access_token,
+        ajax = this.get('ajax'),
+        usersPromise =  this.store.findAll('user');
 
-    if (!authResult) {
-      return;
-    }
-
-    return this.store.findAll('user');
-
-    this.get('auth.auth0').client.userInfo(authResult.accessToken, (err, user) => {
-      let name = user.name;
-      ajax.post('http://localhost:3000/users', {
-        data: JSON.stringify({
-          name: user.givenName,
-          picture: user.picture
-        }),
-        contentType: 'application/json'
-      })
-      .then(response => {
-        // console.log('RESPONSE ID', response.id);
-        // let banana = 'banana';
-        let usersPromise = this.store.findAll('user');
-        return Ember.RSVP.hash({
-          users: usersPromise,
-          name: name
-        });
-      })
-      .catch(function(error) {
-        console.log('error', error);
+    const currentUserPromise = new Promise((resolve, reject) => {
+      this.get('auth.auth0').client.userInfo(token, (err, user) => {
+        ajax.post('http://localhost:3000/users', {
+          data: JSON.stringify({
+            name: user.givenName || user.name,
+            picture: user.picture
+          }),
+          contentType: 'application/json'
+        }).then(response => {
+          resolve(response.user);
+        }).catch(error => {
+          console.log('error getting current user model', error);
+          reject(response);
+        })
       });
+    });
+
+    return Ember.RSVP.hash({
+      users: usersPromise,
+      currentUser: currentUserPromise
     });
 
   },
 
   setupController(controller, models) {
-    controller.setProperties({
-      name: models.name,
-      users: models.users
-    });
-  }
+
+    controller.set('users', models.users);
+
+    this._super(controller, models.currentUser);
+
+  },
 
 });

@@ -71,13 +71,88 @@ body{
   background: greenyellow;
 }
 .hangman{
-  height: 300px;
-  width: 300px;
-  background-image: url('./images/post.png');
+  height: 500px;
+  width: 400px;
   background-repeat: no-repeat;
+  background-image: url('./images/hangman.png');
+  background-size: 60%;
   position: absolute;
   top: 0;
   left: 50px;
+  background-position: center;
+}
+
+.nametag{
+  position: relative;
+  height: 50px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*background: white;*/
+  margin: 0 auto;
+  top: 25%;
+  color: white;
+}
+
+.upright{
+  position: relative;
+  height: 400px;
+  width: 10px;
+  left: 20px;
+  background: black;
+  top: -120px;
+  border-radius: 20%;
+}
+
+.noose{
+  position: relative;
+  width: 50px;
+  height: 25px; /* as the half of the width */
+  /*background-color: bo;*/
+  border-bottom-left-radius: 35px;  /* 100px of height + 10px of border */
+  border-bottom-right-radius: 35px; /* 100px of height + 10px of border */
+  border: 10px solid #654321;
+  border-top: 0;
+  top: -380px;
+  margin: 0 auto;
+}
+
+.rope{
+  position: relative;
+  height: 65px;
+  width: 10px;
+  margin: 0 auto;
+  top: -560px;
+  background: #654321;
+}
+
+.base{
+  position: relative;
+  height: 10px;
+  width: 100px;
+  background: black;
+  bottom: -280px;
+  left: -10px;
+}
+
+.crossbar{
+  position: relative;
+  width: 200px;
+  height: 10px;
+  top: -525px;
+  background: black;
+  left: 20px;
+  border-radius: 20%;
+}
+
+#tshirt{
+  position: absolute;
+  left: 41%;
+  top: 25%;
+  height: 150px;
+  width: 70px;
+  background: black;
 }
 
 input[type=text] {
@@ -114,30 +189,30 @@ input[type=text] {
 }
 #larm, #rarm, #lleg, #rleg{
   position: absolute;
-  width: 2px;
-  height: 35px;
+  width: 6px;
+  height: 100px;
   background: black;
 }
 #larm, #rarm{
-  right: 100px;
+  right: 230px;
   top: 90px;
 }
 #larm{
   transform: rotate(-45deg);
-  right: 89px;
+  right: 225px;
 }
 #rarm{
   transform: rotate(45deg);
-  right: 113px;
+  right: 290px;
 }
 #lleg{
-  top: 158px;
-  right: 112px;
+  top: 50%;
+  right: 280px;
   transform: rotate(35deg);
 }
 #rleg{
-  top: 158px;
-  right: 90px;
+  top: 50%;
+  right: 234px;
   transform: rotate(-35deg);
 }
 

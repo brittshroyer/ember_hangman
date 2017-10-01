@@ -12,9 +12,6 @@ const {
 
 export default Service.extend({
 
-  authResult: null,
-  ajax: Ember.inject.service(),
-
   auth0: computed(function() {
     return new auth0.WebAuth({
       domain: 'brittshroyer.auth0.com',
@@ -38,14 +35,12 @@ export default Service.extend({
 //called at application level
   handleAuthentication() {
 
-    let ajax = this.get('ajax');
-
     return new RSVP.Promise((resolve, reject) => {
-      get(this, 'auth0').parseHash((err, authResult) => {
+      this.get('auth0').parseHash((err, authResult) => {
+
 
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setSession(authResult);
-          this.set('authResult', authResult);
           // this.get('auth0').client.userInfo(authResult.accessToken, (err, user) => {
           //   ajax.post('http://localhost:3000/users', {
           //     data: JSON.stringify({
@@ -55,11 +50,9 @@ export default Service.extend({
           //     contentType: 'application/json'
           //   })
           //   .then(response => {
-          //     Ember.run(function() {
-          //       resolve(response);
-          //       console.log('response id', response.id);
-          //       return response.id;
-          //     });
+          //     // console.log('%j', Object);
+          //     return response;
+          //
           //   })
           //   .catch(function(error) {
           //     console.log('error', error);
@@ -76,6 +69,7 @@ export default Service.extend({
         return resolve();
       });
     });
+
   },
 
 
@@ -84,17 +78,22 @@ export default Service.extend({
     return {
       access_token: localStorage.getItem('access_token'),
       id_token: localStorage.getItem('id_token'),
-      expires_at: localStorage.getItem('expires_at')
+      expires_at: localStorage.getItem('expires_at'),
+      currentUser: localStorage.getItem('currentUser')
     };
   },
 
   setSession(authResult) {
+    let currentUser = this.get('auth0').client.userInfo(authResult.accessToken, (err, user) => {
+      return user.name;
+    });
     if (authResult && authResult.accessToken && authResult.idToken) {
       // Set the time that the access token will expire at
       let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
       localStorage.setItem('access_token', authResult.accessToken);
       localStorage.setItem('id_token', authResult.idToken);
       localStorage.setItem('expires_at', expiresAt);
+      localStorage.setItem('currentUser', currentUser);
     }
   },
 

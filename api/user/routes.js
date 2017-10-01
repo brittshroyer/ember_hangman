@@ -9,16 +9,15 @@ router.post('/', function getUser (req, res) {
   var payload = {};
 
   User.count({ picture: req.body.picture }, function(err, count) {
+    console.log('count', count);
     if (count>0) {
       console.log('User already exists in DB');
-      console.log('body', req.body);
       User.findOne({ picture: req.body.picture }, function(err, document) {
-        console.log('document', document);
         if (err) {
           payload.err = err;
           res.status(400).send(payload);
         }
-        payload['id'] = document._id;
+        payload['user'] = document;
         res.status(201).send(payload);
       });
     } else {
@@ -34,13 +33,21 @@ router.post('/', function getUser (req, res) {
           res.status(400).send(payload);
         } else {
           console.log('user saved to DB');
-          payload['id'] = newUser._id;
+          payload['user'] = newUser;
           res.status(201).send(payload);
         }
       });
     }
   });
 });
+
+router.get('/:id', function(req, res) {
+  var id = req.params.id;
+  User.findById(id).exec().then(function(userDoc) {
+    res.json({user: userDoc});
+  });
+});
+
 
 router.get('/', function(req, res) {
 
