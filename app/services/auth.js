@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import config from 'ember-calculator/config/environment';
 
-
 const {
   computed,
   Service,
@@ -37,30 +36,8 @@ export default Service.extend({
 
     return new RSVP.Promise((resolve, reject) => {
       this.get('auth0').parseHash((err, authResult) => {
-
-
         if (authResult && authResult.accessToken && authResult.idToken) {
-          this.setSession(authResult);
-          // this.get('auth0').client.userInfo(authResult.accessToken, (err, user) => {
-          //   ajax.post('http://localhost:3000/users', {
-          //     data: JSON.stringify({
-          //       name: user.givenName,
-          //       picture: user.picture
-          //     }),
-          //     contentType: 'application/json'
-          //   })
-          //   .then(response => {
-          //     // console.log('%j', Object);
-          //     return response;
-          //
-          //   })
-          //   .catch(function(error) {
-          //     console.log('error', error);
-          //     Ember.run(function() {
-          //       reject(error);
-          //     });
-          //   });
-          // });
+        Í  this.setSession(authResult);
 
         } else if (err) {
           return reject(err);
@@ -69,10 +46,7 @@ export default Service.extend({
         return resolve();
       });
     });
-
   },
-
-
 
   getSession() {
     return {

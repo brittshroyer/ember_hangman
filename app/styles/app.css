@@ -1,74 +1,170 @@
 body{
   background: #4672E8;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
   font-family: 'Gloria Hallelujah', cursive;
-
 }
+
 .title{
   text-align: center;
-  margin-top: 16vh;
+  margin-top: 10px;
   font-size: 60px;
-}
-.topic{
-  margin-bottom: 10px;
-}
-
-.enterNames, .set-topic{
-  height: 30vh;
-  width: 40vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto 0 auto;
-}
-.start, .topic-display, #set-answer{
-  width: 40vw;
-  margin: 0 auto 0 auto;
-  text-align: center;
 }
 
 .guess-letters{
+  width: 600px;
+  height: 250px;
+  position: relative;
+  left: 700px;
+  top: 130px;
   text-align: center;
-  height: 25vh;
-  letter-spacing: 10px;
-  margin: -10vh auto 5vh auto;
-  /*width: auto;*/
-  /*font-size: 3.5vh;*/
-  font-size: 2.5vw;
-  /*display: inline-block;*/
 }
-/*.nonSpaces{
-  word-break: keep-all;
-}*/
+
+.hero{
+  text-align: center;
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.letter{
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  letter-spacing: 10px;
+  font-size: 10px;
+}
+.fa-sign-out{
+  margin-right: 10px;
+}
+
+.navbar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signout, .scoreboard{
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.leaderboard{
+  position: relative;
+  height: 400px;
+  width: 600px;
+  background: #141414;
+  margin: 0 auto;
+  border: 35px solid #4CAF50;
+  overflow-y: scroll;
+  color: #D3D3D3;
+  padding-right: 17px;
+}
+
+.back-to-play{
+  position: relative;
+  margin: 20px auto 0 auto;
+  width: 200px;
+  text-align: center;
+}
+
+th, td{
+  width: 200px;
+  text-align: center;
+}
+
+th{
+  font-size: 20px;
+  height: 50px;
+}
+
+.sign-in-button{
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  position: relative;
+  margin: 150px auto 0 auto;
+}
+
+.fa-play-circle{
+  cursor: pointer;
+}
+
+.personal-score{
+  width: 110px;
+  height: 60px;
+  border: 8px solid #D3D3D3;
+  position: absolute;
+  right: 200px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  background: #141414;
+  color: white;
+}
+
+.play-button{
+  height: 72px;
+  width: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: -350px auto 0 auto;
+  cursor: pointer;
+}
+
+.dashes{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 800px;
+  right: 100px;
+  top: 220px;
+  font-size: 28px;
+  letter-spacing: 20px;
+}
+
 .submit-answer{
   height: 30vh;
   width: 40vw;
   margin: 0 auto;
   text-align: center;
 }
-#buttons{
-  width: 80vw; height: 25vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: 10vw;
-  bottom: 0;
 
-}
-.individual-button{
-  /*display: inline-block;*/
-  height: 40px;
-  width: 40px;
-  margin: 4px;
-  font-size: 20px;
+.fa-refresh{
   cursor: pointer;
-  box-shadow: 3px 3px 3px;
-  border-radius: 10px;
-  background: greenyellow;
+}
+
+.individual-button{
+  height: 45px;
+  width: 45px;
+  margin: 4px;
+  font-size: 18px;
+  border-radius: 20%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #141414;
+  color: white;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 .hangman{
   height: 500px;
@@ -77,9 +173,37 @@ body{
   background-image: url('./images/hangman.png');
   background-size: 60%;
   position: absolute;
-  top: 0;
+  top: 75px;
   left: 50px;
   background-position: center;
+  margin-top: 100px;
+}
+
+.eyes{
+  height: 20px;
+  width: 37px;
+  position: relative;
+  margin: 0 auto;
+  top: -540px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eyeball{
+  height: 16px;
+  width: 5px;
+  background: #8A0707;
+  display: inline-block;
+}
+.eyeballLeft{
+  transform: rotate(45deg);
+  margin-right: -6px;
+}
+
+.eyeballRight{
+  transform: rotate(-45deg);
+  margin-left: -6px;
 }
 
 .nametag{
@@ -89,7 +213,6 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  /*background: white;*/
   margin: 0 auto;
   top: 25%;
   color: white;
@@ -146,15 +269,6 @@ body{
   border-radius: 20%;
 }
 
-#tshirt{
-  position: absolute;
-  left: 41%;
-  top: 25%;
-  height: 150px;
-  width: 70px;
-  background: black;
-}
-
 input[type=text] {
   width: 100%;
   padding: 10px 20px;
@@ -176,69 +290,4 @@ input[type=text] {
   font-size: 16px;
   margin-top: 15px;
   cursor: pointer;
-}
-
-
-#body{
-  height: 85px;
-  width: 4px;
-  position: absolute;
-  right: 100px;
-  background: black;
-  top: 77px;
-}
-#larm, #rarm, #lleg, #rleg{
-  position: absolute;
-  width: 6px;
-  height: 100px;
-  background: black;
-}
-#larm, #rarm{
-  right: 230px;
-  top: 90px;
-}
-#larm{
-  transform: rotate(-45deg);
-  right: 225px;
-}
-#rarm{
-  transform: rotate(45deg);
-  right: 290px;
-}
-#lleg{
-  top: 50%;
-  right: 280px;
-  transform: rotate(35deg);
-}
-#rleg{
-  top: 50%;
-  right: 234px;
-  transform: rotate(-35deg);
-}
-
-.gameOver{
-  color: red;
-}
-.guesses{
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  font-size: 35px;
-}
-#guessNumber{
-  color: red;
-}
-footer{
-  text-align: center;
-
-}
-.headshot{
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  right: 25%;
-  top: 10%;
-  border-radius: 30%;
-  transform: scale(1.3);
-  z-index: 1;
 }

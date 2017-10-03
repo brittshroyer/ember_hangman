@@ -9,7 +9,6 @@ router.post('/', function getUser (req, res) {
   var payload = {};
 
   User.count({ picture: req.body.picture }, function(err, count) {
-    console.log('count', count);
     if (count>0) {
       console.log('User already exists in DB');
       User.findOne({ picture: req.body.picture }, function(err, document) {
@@ -23,7 +22,9 @@ router.post('/', function getUser (req, res) {
     } else {
       var userInfo = {
         name: req.body.name,
-        picture: req.body.picture
+        picture: req.body.picture,
+        points: 0,
+        streak: 0
       };
       var newUser = new User(userInfo);
       console.log('newUser', newUser);
@@ -62,6 +63,29 @@ router.get('/', function(req, res) {
     });
     res.send(payload);
   });
+
+});
+
+router.put('/:id', function(req, res) {
+
+  var payload = {};
+
+  User.findOneAndUpdate({ _id: req.params.id },
+    req.body.user,
+    {
+      upsert: true,
+      new: true
+    },
+    function returnDoc(err, userDoc) {
+      if (err) {
+        payload.error = err;
+        res.status(400).send(payload);
+      } else {
+        payload.user = userDoc;
+        res.status(200).send(payload);
+      }
+    }
+  );
 
 });
 

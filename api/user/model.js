@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
   name: { type: String },
   picture: {type: String },
+  points: {type: Number},
+  streak: {type: Number},
   versionKey: false
 });
 

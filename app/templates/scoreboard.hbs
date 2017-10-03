@@ -1,0 +1,20 @@
+<div class="leaderboard">
+  <table>
+    <tr>
+      <th>NAME</th>
+      <th>HIGH SCORE</th>
+      <th>BEST STREAK</th>
+    </tr>
+    {{#each model as |user|}}
+      <tr>
+        <td>{{user.name}}</td>
+        <td>{{user.points}}</td>
+        <td>{{user.streak}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
+
+<div class="back-to-play">
+  <button type="submit" class="btn" {{action 'transitionToPlay'}}>Play</button>
+</div>

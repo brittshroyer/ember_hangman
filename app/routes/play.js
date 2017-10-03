@@ -8,17 +8,14 @@ export default Route.extend({
 
   beforeModel() {
 
-    // this.get('auth').logout();
     if (!this.get('auth.isAuthenticated')) {
       return this.replaceWith('application');
     }
-
   },
 
   model() {
     let token = this.get('auth').getSession().access_token,
-        ajax = this.get('ajax'),
-        usersPromise =  this.store.findAll('user');
+        ajax = this.get('ajax');
 
     const currentUserPromise = new Promise((resolve, reject) => {
       this.get('auth.auth0').client.userInfo(token, (err, user) => {
@@ -29,26 +26,24 @@ export default Route.extend({
           }),
           contentType: 'application/json'
         }).then(response => {
-          resolve(response.user);
+          return this.store.findRecord('user', response.user['_id'])
+          .then(response => {
+            resolve(response);
+          })
         }).catch(error => {
           console.log('error getting current user model', error);
           reject(response);
-        })
+        });
       });
     });
 
-    return Ember.RSVP.hash({
-      users: usersPromise,
-      currentUser: currentUserPromise
-    });
+    return currentUserPromise;
 
   },
 
-  setupController(controller, models) {
+  setupController(controller, model) {
 
-    controller.set('users', models.users);
-
-    this._super(controller, models.currentUser);
+    this._super(controller, model);
 
   },
 

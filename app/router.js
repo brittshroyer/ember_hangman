@@ -7,10 +7,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-
   this.route('play');
 
   this.route('results');
+  this.route('scoreboard');
 });
 
 export default Router;

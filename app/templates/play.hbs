@@ -1,93 +1,72 @@
+<div class="navbar">
+  <div class="signout" onclick={{action 'signOut'}}>
+    <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+    <h4>Sign Out</h4>
+  </div>
+  <div class="scoreboard" onclick={{action 'transitionToScoreboard'}}>
+    <h4>Scoreboard</h4>
+  </div>
+</div>
 
 <div class="submit-answer">
-  {{#if end}}
-    {{#link-to "index"}}<button class="btn"{{action 'restart'}}>Play Again</button>{{/link-to}}
-  {{/if}}
-
-  <button class="btn" {{action 'logout'}}>Logout</button>
-
-
   {{#if displayDefinition}}
     {{definition}}
-  {{else}}
-
-
-
-    <button onclick={{action 'getWord' (mut showLetters) true}} class="btn" id="start_btn">Get Word</button>
   {{/if}}
 </div>
 
-{{#if displayGuessField}}
-  <p class="guess-letters" id="guess-letters">
-      {{#each wordToPresent as |letter|}}
-        {{letter.placeholder}}
-      {{/each}}
-  </p>
-{{/if}}
-
-<div id="buttons">
-  {{#if showLetters}}
+<p class="dashes">
+    {{#each wordToPresent as |character|}}
+      {{character.placeholder}}
+    {{/each}}
+</p>
+<div class="guess-letters">
+  {{#if end}}
+    <i class="fa fa-refresh fa-5x" onclick={{action 'getWord'}} aria-hidden="true"></i>
+  {{else}}
     {{#each alphabet as |character|}}
-      {{#unless end}}
-        {{letter-component let=character action="controllerCheckAnswer"}}
-      {{/unless}}
+    <div class="letter">{{letter-component let=character action="checkAnswer"}}</div>
     {{/each}}
   {{/if}}
 </div>
 
-{{!-- scoreboard --}}
+{{#unless definition}}
+  <div class="play-button">
+    <button type="submit" class="btn" {{action 'getWord'}}>Start</button>
+  </div>
+{{/unless}}
 
-
-
-
-{{#if showHead}}
-  <img src={{user.currentUser.picture}}>
-{{/if}}
-
-
-
-
-<div class="guesses">
-  {{#if dead}}
-    <p class="gameOver">Game Over</p>
-  {{/if}}
-  {{#if winner}}
-    <p>{{index.pname}} has survived!</p>
-  {{/if}}
-  {{#unless end}}
-    <p><span id="guessNumber">{{wrongGuesses}}</span> guesses remaining.</p>
-  {{/unless}}
+<div class="personal-score">
+  <div>Points:&nbsp;{{model.points}}</div>
+  <div>Streak:&nbsp;{{currentStreak}}</div>
 </div>
 
-{{#if showHead}}
-  <div class="bodyPart" id="head"></div>
-{{/if}}
-
-
-
 <div class="hangman">
-  <div class="nametag">{{model.name}}</div>
-  <div class="base"></div>
-  <div class="upright"></div>
-  <div class="crossbar"></div>
-  <div class="noose"></div>
-  <div class="rope"></div>
-  {{!-- {{#if showHead}}
-    <div class="bodyPart" id="head"></div>
+    <div class="nametag">{{model.name}}</div>
+  {{#if showBase}}
+    <div class="base"></div>
   {{/if}}
-  {{#if showBody}}
-    <div class="bodyPart" id="tshirt"></div>
+  {{#if showUpright}}
+    <div class="upright"></div>
   {{/if}}
-  {{#if showRArm}}
-    <div class="bodyPart" id="rarm"></div>
+  {{#if showCrossbar}}
+    <div class="crossbar"></div>
   {{/if}}
-  {{#if showLArm}}
-    <div class="bodyPart" id="larm"></div>
+  {{#if showNoose}}
+    <div class="noose"></div>
   {{/if}}
-  {{#if showLLeg}}
-    <div class="bodyPart" id="lleg"></div>
+  {{#if showRope}}
+    <div class="rope"></div>
   {{/if}}
-  {{#if showRLeg}}
-    <div class="bodyPart" id="rleg"></div>
-  {{/if}} --}}
+  {{#if showEyes}}
+  <div class="eyes">
+    <div class="eyePair">
+       <div class="eyeball eyeballLeft"></div>
+       <div class="eyeball eyeballRight"></div>
+    </div>
+    <div class="eyePair">
+      <div class="eyeball eyeballLeft"></div>
+      <div class="eyeball eyeballRight"></div>
+    </div>
+  </div>
+  {{/if}}
 </div>
