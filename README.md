@@ -1,3 +1,10 @@
+# About
+
+I work with Ember.js every day so I thought it would be a good idea to build something of my own using the framework. Since I couldn't find a great API, I created my own data using mLabs (MongoDB), and built an API that fetches and feeds those words to the Ember app. On the front end, I'm also using Auth0 for authentication. Oh yea, it's a hangman game.
+
+# Technologies
+Emberjs, Nodejs, Javascript, Auth0, AJAX
+
 # ember-calculator
 
 This README outlines the details of collaborating on this Ember application.
